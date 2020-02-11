@@ -43,7 +43,6 @@ def find_outliers(data:np.array, delta_modifier:int=3, EPS:float=1e-6):
     lower_thresold = avg_sigma - delta_modifier * delta
     upper_thresold = avg_sigma + delta_modifier * delta
     
-    print((data > (lower_thresold - EPS)) & (data < (upper_thresold + EPS)))
     data_new = data[(data > (lower_thresold - EPS)) & (data < (upper_thresold + EPS))].copy()
     
     if len(data_new) != len(data):
