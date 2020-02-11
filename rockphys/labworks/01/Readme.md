@@ -1,9 +1,14 @@
 # How to use
 [1] Установить python 3: https://www.python.org/downloads/
+
 [2] Скачать репозиторий к себе
+
 [3] Перейти в эту папку у себя на компьютере
+
 [4] Открыть командную строку https://beginpc.ru/windows/komandnaya-stroka
+
 [5] Перейти в эту папку http://mojainformatika.ru/studentam-povtias/komandnaya-stroka-windows/143-komanda-smeny-tekushhego-kataloga-cd.html
+
 [6] Установить нужные пакеты
 ```
 pip install -r requirements.txt
