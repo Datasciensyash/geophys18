@@ -48,4 +48,4 @@ def find_outliers(data:np.array, delta_modifier:int=3, EPS:float=1e-6):
     if len(data_new) != len(data):
         return find_outliers(data_new, delta_modifier=delta_modifier, EPS=EPS)
     else:
-        return lower_thresold, upper_thresold, [avg_sigma, delta]
+        return lower_thresold, upper_thresold, distribution, [avg_sigma, delta, step_size, np.min(data)]

@@ -8,19 +8,27 @@ data = np.array(eval('[' + data_raw + ']')) #That is bad.
 
 delta = st.slider('Delta modifier', 1, 5, value=3)
 
-lower, upper, etc = find_outliers(data, delta)
+lower, upper, distribution, etc = find_outliers(data, delta)
 
 colors = ['g' if i else 'r' for i in (data > (lower - 1e-6)) & (data < (upper + 1e-6))]
 
-plt.scatter([i for i in range(len(data))], data, c=colors, label="Measurements")
+x = [i for i in range(len(distribution))]
+plt.bar(x, distribution)
+plt.xticks(x, [f'{round(etc[3] + etc[2] * i, 1)} - {round(etc[3] + etc[2] * (i + 1), 1)}' for i in x], rotation=20, size=7)
+plt.xlabel("Weight")
+plt.ylabel("Number of measurements")
+st.pyplot()
+plt.cla()
 
+plt.scatter([i for i in range(len(data))], data, c=colors, label="Measurements")
 plt.axhline(upper, c='r', label=f'Upper threshold: {round(upper, 4)}')
 plt.axhline(lower, c='g', label=f'Lower threshold: {round(lower, 4)}')
 plt.xlabel("N of measurement")
 plt.ylabel("Measured weight")
 plt.legend()
-
 st.pyplot()
+
+
 
 st.info(f'Average standard deviation: {round(etc[0], 3)}')
 st.info(f'Delta-value: {round(etc[1], 3)}')
