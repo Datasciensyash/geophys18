@@ -10,11 +10,20 @@ delta = st.slider('Delta modifier', 1, 5, value=3)
 
 lower, upper = find_outliers(data, delta)
 
-plt.scatter([i for i in range(len(data))], data, c='b', label="Measurements")
-plt.axhline(upper, c='r', label=f'Upper thresold: {round(upper, 4)}')
-plt.axhline(lower, c='g', label=f'Lower thresold: {round(lower, 4)}')
+colors = ['g' if i else 'r' for i in (data > (lower - 1e-6)) & (data < (upper + 1e-6))]
+
+plt.scatter([i for i in range(len(data))], data, c=colors, label="Measurements")
+
+plt.axhline(upper, c='r', label=f'Upper threshold: {round(upper, 4)}')
+plt.axhline(lower, c='g', label=f'Lower threshold: {round(lower, 4)}')
 plt.xlabel("N of measurement")
 plt.ylabel("Measured weight")
 plt.legend()
 
 st.pyplot()
+
+st.subheader('Some statistics about your data.')
+
+st.info(f'Max weight: {np.max(data)}')
+st.info(f'Min weight: {np.min(data)}')
+st.info(f'Standard deviation: {data.std()}')
