@@ -8,7 +8,7 @@ data = np.array(eval('[' + data_raw + ']')) #That is bad.
 
 delta = st.slider('Delta modifier', 1, 5, value=3)
 
-lower, upper = find_outliers(data, delta)
+lower, upper, etc = find_outliers(data, delta)
 
 colors = ['g' if i else 'r' for i in (data > (lower - 1e-6)) & (data < (upper + 1e-6))]
 
@@ -21,6 +21,9 @@ plt.ylabel("Measured weight")
 plt.legend()
 
 st.pyplot()
+
+st.info(f'Average standard deviation: {round(etc[0], 3)}')
+st.info(f'Delta-value: {round(etc[1], 3)}')
 
 st.subheader('Statistics for true measurements.')
 st.success(f'Max weight: {np.max(data[(data > (lower - 1e-6)) & (data < (upper + 1e-6))])}, Min weight: {np.min(data[(data > (lower - 1e-6)) & (data < (upper + 1e-6))])}')
