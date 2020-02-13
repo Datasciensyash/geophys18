@@ -22,8 +22,10 @@ plt.legend()
 
 st.pyplot()
 
-st.subheader('Some statistics about your data.')
+st.subheader('Statistics for true measurements.')
+st.success(f'Max weight: {np.max(data[(data > (lower - 1e-6)) & (data < (upper + 1e-6))])}, Min weight: {np.min(data[(data > (lower - 1e-6)) & (data < (upper + 1e-6))])}')
+st.success(f'Mean weight: {round(data[(data > (lower - 1e-6)) & (data < (upper + 1e-6))].mean(), 2)} ± {round(data[(data > (lower - 1e-6)) & (data < (upper + 1e-6))].std(), 2)}')
 
-st.info(f'Max weight: {np.max(data)}')
-st.info(f'Min weight: {np.min(data)}')
-st.info(f'Standard deviation: {data.std()}')
+st.subheader('Statistics for all measurements.')
+st.info(f'Max weight: {np.max(data)}, Min weight: {np.min(data)}')
+st.info(f'Mean weight: {round(data.mean(), 2)} ± {round(data.std(), 2)}')
