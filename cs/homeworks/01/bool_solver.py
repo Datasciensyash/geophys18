@@ -1,4 +1,5 @@
 import re 
+import pandas as pd 
 
 class BoolStringSolver():
   
@@ -40,7 +41,7 @@ class BoolStringSolver():
         string = re.sub(f'._{i}', str(bool_mask[i - 1]), string)
     else:
       for i, var_name in enumerate(var_names):
-        string = string.replace(string, var_name, str(bool_mask[i]))
+        string = string.replace(var_name, str(bool_mask[i]))
     return string
 
   @staticmethod
@@ -50,9 +51,13 @@ class BoolStringSolver():
   @staticmethod
   def solve_string(string, num_var, var_names=[]):
     counter = 0
+    outputs = []
     bool_masks = BoolStringSolver.get_bool_masks(num_var)
     for mask in bool_masks:
       output = BoolStringSolver.eval_string(BoolStringSolver.parse_string(string, mask, var_names))
+      outputs.append(output)
       if output == True:
         counter += 1
-    return counter
+    dataframe = pd.DataFrame(bool_masks, columns=var_names)
+    dataframe['Result'] = pd.Series(outputs)
+    return counter, dataframe
