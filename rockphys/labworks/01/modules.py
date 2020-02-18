@@ -24,7 +24,7 @@ def get_avg_sigma(data, distribution, step_size):
 def get_delta(data, avg_sigma):
     return np.sqrt(np.sum((data - avg_sigma) ** 2) / (len(data) - 1))    
 
-def find_outliers(data:np.array, delta_modifier:int=3, EPS:float=1e-6):
+def find_outliers(data:np.array, delta_modifier:int=3, EPS:float=1e-6, theta:float=2.7):
     """
     Finding thresolds of outliers in data.
         np.array: data -> Np array with data
@@ -48,4 +48,8 @@ def find_outliers(data:np.array, delta_modifier:int=3, EPS:float=1e-6):
     if len(data_new) != len(data):
         return find_outliers(data_new, delta_modifier=delta_modifier, EPS=EPS)
     else:
-        return lower_thresold, upper_thresold, distribution, [avg_sigma, delta, step_size, np.min(data)]
+        density_average = np.sum(data_new) / len(data_new)
+        sigma_ro = delta / np.sqrt(len(data_new))
+        delta_sigma = sigma_ro * theta
+        accuracy = 1 / delta_sigma
+        return lower_thresold, upper_thresold, distribution, [avg_sigma, delta, step_size, np.min(data), accuracy, sigma_ro], density_average, delta_sigma
