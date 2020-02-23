@@ -24,7 +24,7 @@ plt.scatter([i for i in range(len(data))], data, c=colors, label="Measurements")
 plt.axhline(upper, c='r', label=f'Upper threshold: {round(upper, 4)}')
 plt.axhline(lower, c='g', label=f'Lower threshold: {round(lower, 4)}')
 
-plt.axhline(ro_average - delta_sigma, c='c', label=f'Upper predicted density {round(ro_average - delta_sigma, 3)}', alpha=0.15)
+plt.axhline(ro_average - delta_sigma, c='c', label=f'Lower predicted density {round(ro_average - delta_sigma, 3)}', alpha=0.15)
 plt.axhline(ro_average, c='c', label=f'Avg. predicted density {round(ro_average, 3)}', alpha=0.5)
 plt.axhline(ro_average + delta_sigma, c='c', label=f'Upper predicted density {round(ro_average + delta_sigma, 3)}', alpha=0.15)
 
