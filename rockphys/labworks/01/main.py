@@ -15,7 +15,7 @@ colors = ['g' if i else 'r' for i in (data > (lower - 1e-6)) & (data < (upper + 
 x = [i for i in range(len(distribution))]
 plt.bar(x, distribution)
 plt.xticks(x, [f'{round(etc[3] + etc[2] * i, 1)} - {round(etc[3] + etc[2] * (i + 1), 1)}' for i in x], rotation=20, size=7)
-plt.xlabel("density")
+plt.xlabel("Density")
 plt.ylabel("Number of measurements")
 st.pyplot()
 plt.cla()
@@ -47,3 +47,6 @@ st.success(f'Mean density: {round(data[(data > (lower - 1e-6)) & (data < (upper 
 st.subheader('Statistics for all measurements.')
 st.info(f'Max density: {np.max(data)}, Min density: {np.min(data)}')
 st.info(f'Mean density: {round(data.mean(), 2)} ± {round(data.std(), 2)}')
+
+#strfuck = r'\ '
+#st.latex(f'n = {strfuck}frac{max(data[(data > (lower - 1e-6)) & (data < (upper + 1e-6))]) - min(data[(data > (lower - 1e-6)) & (data < (upper + 1e-6))])}{7}')
