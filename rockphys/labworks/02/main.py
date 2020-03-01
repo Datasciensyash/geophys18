@@ -28,7 +28,15 @@ df = pd.DataFrame(list(zip(A_values, P_values, H_values, K_values, KM_values)), 
 st.table(df)
 filename = st.text_input('Csv filename', value='output.csv')
 if st.button('Save'):
+    #grid = []
+    #for i in range(7):
+        #for j in range(15):
+            #grid.append([i, j, KM_values[i * 7 + j]])
+    #print(grid)
+    #pd.DataFrame(grid).to_csv(f'grid-{filename}', index=False)
+    pd.DataFrame(KM_values.reshape(15, 7), index='1 2 3 4 5 6 7 8 9 10 11 12 13 14 15'.split(' '), columns='I II III IV V VI VII'.split(' ')).to_csv(f'grid-{filename}', index=False)
     df.to_csv(filename, index=False)
+
 
 try:
     plt.figure(figsize=(8, 8))
