@@ -6,10 +6,10 @@ import pandas as pd
 import cv2
 
 A_values = st.text_input('Values of A', value='2.2, 2.05, 1.9')
-A_values = np.array(eval('[' + A_values + ']')) #That is bad.
+A_values = np.array(eval('[' + A_values.replace(' ', ',') + ']')) #That is bad.
 
 P_values = st.text_input('Values of P', value='65, 72, 75')
-P_values = np.array(eval('[' + P_values + ']')) #That is bad.
+P_values = np.array(eval('[' + P_values.replace(' ', ',') + ']')) #That is bad.
 
 H_values = st.text_input('Values of H', value='65, 72, 75')
 H_values = np.array(eval('[' + H_values.replace(' ', ',') + ']')) #That is bad.
