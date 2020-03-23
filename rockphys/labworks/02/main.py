@@ -25,34 +25,42 @@ for i in range(len(K_values)):
 KM_values = np.array(KM_values)
 
 df = pd.DataFrame(list(zip(A_values, P_values, H_values, np.around(K_values, 6), np.around(KM_values, 6))), columns=['A', 'P', 'H', 'Kf', 'Km'])
-st.write(df)
+st.table(df)
 filename = st.text_input('Csv filename', value='output.csv')
 if st.button('Save'):
     pd.DataFrame(KM_values.reshape(15, 7), index='1 2 3 4 5 6 7 8 9 10 11 12 13 14 15'.split(' '), columns='I II III IV V VI VII'.split(' ')).to_csv(f'grid-{filename}', index=False)
     df.to_csv(filename, index=False, sep=';')
 
+your_map = st.checkbox('Ввести ваши KM для построения карты', value=False)
+if your_map:
+    KM_values = st.text_input('Values of KM', value='6,5 7,2 7,5')
+    KM_values = np.array(eval('[' + KM_values.replace(',', '.').replace(' ', ',') + ']')) #That is bad.
 
+aug_map = st.checkbox('Аугментировать карту? (Может получиться посимпатичнее)', value=False)
 try:
     plt.figure(figsize=(8, 8))
     arr = KM_values.reshape(7, 15).astype('float').T
     n = st.slider('n', min_value=1, max_value=25, value=1)
-    det = st.slider('Denominator', min_value=0.1, max_value=1.0, value=0.1)
-    arr1 = cv2.resize(arr, (4 , 8), interpolation=cv2.INTER_CUBIC).astype(np.float64)
-    arr2 = cv2.resize(arr, (4 , 6), interpolation=cv2.INTER_CUBIC).astype(np.float64)
-    #Priors_start
-    arr1[0:7, 3] = arr1[0:7, 3] * det
-    arr1[7, 0:3] = arr1[7, 0:3] * det
+    if aug_map:
+        det = st.slider('Denominator', min_value=0.1, max_value=1.0, value=0.1)
+        arr1 = cv2.resize(arr, (4 , 8), interpolation=cv2.INTER_CUBIC).astype(np.float64)
+        arr2 = cv2.resize(arr, (4 , 6), interpolation=cv2.INTER_CUBIC).astype(np.float64)
+        #Priors_start
+        arr1[0:7, 3] = arr1[0:7, 3] * det
+        arr1[7, 0:3] = arr1[7, 0:3] * det
 
-    arr2[0:5, 3] = arr2[0:5, 3] * det
-    arr2[5, 0:3] = arr2[5, 0:3] * det
+        arr2[0:5, 3] = arr2[0:5, 3] * det
+        arr2[5, 0:3] = arr2[5, 0:3] * det
 
-    arr1[7, 3] = arr1[7, 3] * det
-    arr2[5, 3] = arr2[5, 3] * det   
+        arr1[7, 3] = arr1[7, 3] * det
+        arr2[5, 3] = arr2[5, 3] * det   
 
-    #Priors_end        
-    arr1 = cv2.resize(arr1, (7 * 2 * n , 15 * n), interpolation=cv2.INTER_CUBIC)
-    arr2 = cv2.resize(arr2, (7 * 2 * n , 15 * n), interpolation=cv2.INTER_CUBIC)   
-    arr = (arr1 + arr2) / 2
+        #Priors_end        
+        arr1 = cv2.resize(arr1, (7 * 2 * n , 15 * n), interpolation=cv2.INTER_CUBIC)
+        arr2 = cv2.resize(arr2, (7 * 2 * n , 15 * n), interpolation=cv2.INTER_CUBIC)   
+        arr = (arr1 + arr2) / 2
+    else:
+        arr = cv2.resize(arr, (7 * 2 * n , 15 * n), interpolation=cv2.INTER_CUBIC)
 
     image = arr
     for i in range(int(image.min() // 100), int(image.max() // 100) + 1):
