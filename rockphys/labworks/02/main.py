@@ -5,14 +5,14 @@ from modules import get_coeffs, get_K, arr_wa
 import pandas as pd
 import cv2
 
-A_values = st.text_input('Values of A', value='2.2, 2.05, 1.9')
-A_values = np.array(eval('[' + A_values.replace(' ', ',') + ']')) #That is bad.
+A_values = st.text_input('Values of A', value='2.2 2.05 1.9')
+A_values = np.array(eval('[' + A_values.replace(',', '.').replace(' ', ',') + ']')) #That is bad.
 
-P_values = st.text_input('Values of P', value='65, 72, 75')
-P_values = np.array(eval('[' + P_values.replace(' ', ',') + ']')) #That is bad.
+P_values = st.text_input('Values of P', value='65 72 75')
+P_values = np.array(eval('[' + P_values.replace(',', '.').replace(' ', ',') + ']')) #That is bad.
 
-H_values = st.text_input('Values of H', value='65, 72, 75')
-H_values = np.array(eval('[' + H_values.replace(' ', ',') + ']')) #That is bad.
+H_values = st.text_input('Values of H', value='65 72 75')
+H_values = np.array(eval('[' + H_values.replace(',', '.').replace(' ', ',') + ']')) #That is bad.
 
 K_values = []
 for i in range(len(A_values)):
@@ -24,12 +24,12 @@ for i in range(len(K_values)):
     KM_values.append(K_values[i] * H_values[i])
 KM_values = np.array(KM_values)
 
-df = pd.DataFrame(list(zip(A_values, P_values, H_values, K_values, KM_values)), columns=['A', 'P', 'H', 'Kф', 'Km'])
-st.table(df)
+df = pd.DataFrame(list(zip(A_values, P_values, H_values, np.around(K_values, 6), np.around(KM_values, 6))), columns=['A', 'P', 'H', 'Kf', 'Km'])
+st.write(df)
 filename = st.text_input('Csv filename', value='output.csv')
 if st.button('Save'):
     pd.DataFrame(KM_values.reshape(15, 7), index='1 2 3 4 5 6 7 8 9 10 11 12 13 14 15'.split(' '), columns='I II III IV V VI VII'.split(' ')).to_csv(f'grid-{filename}', index=False)
-    df.to_csv(filename, index=False)
+    df.to_csv(filename, index=False, sep=';')
 
 
 try:
