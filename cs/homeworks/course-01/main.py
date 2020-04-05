@@ -19,12 +19,20 @@ def print_array(arr, diag_val=0, print_end=',', prettify_out=True):
 		print('\n', end='')
 	print('\n', end='')
 
-def get_all_matrices(arr_size:int=10, diag:bool=True, print_end:str=',', prettify_out:bool=True):
+def add_numeration(arr):
+	out_array = np.zeros((arr.shape[0] + 1, arr.shape[1] + 1)).astype(np.int16)
+	out_array[0:arr.shape[0] + 1, 0] = np.array([i for i in range(0, arr.shape[0] + 1)])
+	out_array[0, 0:arr.shape[0] + 1] = np.array([i for i in range(0, arr.shape[0] + 1)])
+	out_array[1:, 1:] = arr
+	return out_array
+
+def get_all_matrices(arr_size:int=10, diag:bool=True, need_numeration:bool=True, print_end:str=',', prettify_out:bool=True):
 	"""
 	Процедура получения всех массивов сразу.
 
 	int:arr_size: Размер массива.
 	bool:diag: Если False, то элементы на диагонали заменяются на пробелы.
+	bool:need_numeration: Если True, то ко всем массивам добавляется нумерация.
 	str:print_end: Строка, завершающая вывод каждого элемента массива.
 	bool:prettify_out: Если True, то массив будет выводиться красиво.
 
@@ -36,12 +44,16 @@ def get_all_matrices(arr_size:int=10, diag:bool=True, print_end:str=',', prettif
 		np.fill_diagonal(np.fliplr(arr), 0)
 
 	for index in range(4):
-		print_array(arr, diag_val=0, print_end=print_end, prettify_out=prettify_out)
-		print_array(arr.T, diag_val=0, print_end=print_end, prettify_out=prettify_out)
+		if need_numeration:
+			print_array(add_numeration(arr), diag_val=0, print_end=print_end, prettify_out=prettify_out)
+			print_array(add_numeration(arr.T), diag_val=0, print_end=print_end, prettify_out=prettify_out)			
+		else:
+			print_array(arr, diag_val=0, print_end=print_end, prettify_out=prettify_out)
+			print_array(arr.T, diag_val=0, print_end=print_end, prettify_out=prettify_out)
 		arr = np.rot90(arr)
 	return None
 
-get_all_matrices(arr_size=10, diag=False, print_end=',', prettify_out=True)
-
+if __name__ == '__main__':
+	get_all_matrices(arr_size=10, diag=False, need_numeration=True, print_end=',', prettify_out=True)
 
 
