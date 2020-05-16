@@ -3,14 +3,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 import streamlit as st
 
-data_raw = st.text_input('15, 15, 16, 19, 70, 55, 30, 20, 16, 16, 18, 20, 600, 40, 100, 25, 38, 18, 15, 17, 29')
+data_raw = st.text_input('Данные:', value='15, 15, 16, 19, 70, 55, 30, 20, 16, 16, 18, 20, 600, 40, 100, 25, 38, 18, 15, 17, 29')
 data = np.array(eval('[' + data_raw + ']')) #That is bad.
 
 delta = st.slider('Delta modifier', 1, 5, value=3)
 
 lower, upper, distribution, etc, ro_average, delta_sigma = find_outliers(data, delta)
 
-colors = ['g' if i else 'r' for i in (data > (lower - 1e-6)) & (data < (upper + 1e-6))]
+colors = ['g' if i else 'r' for i in (data >= lower) & (data <= upper)]
 
 x = [i for i in range(len(distribution))]
 plt.bar(x, distribution)
@@ -27,3 +27,5 @@ plt.xlabel("Номер измерения, n")
 plt.ylabel("Интенсивность гамма-излучения, Iγ")
 plt.legend(fontsize='x-small')
 st.pyplot()
+
+st.info(f'Аномалии (Номера пикетов): {np.argwhere(np.array(data) > upper).T}')
