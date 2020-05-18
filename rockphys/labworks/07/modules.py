@@ -8,7 +8,7 @@ def get_distribution(data, num_steps, step_size, EPS=1e-6):
 
     distribution = []
     for i in range(num_steps):
-        distribution.append(np.sum((data > (np.min(data) + i * step_size - EPS)) & (data < (np.min(data) + (i + 1) * step_size))))
+        distribution.append(np.sum((data > (np.min(data) + i * step_size - EPS)) & (data < (np.min(data) + (i + 1) * step_size + EPS))))
 
     return distribution
 

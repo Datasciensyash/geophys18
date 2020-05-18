@@ -1,4 +1,6 @@
 from modules import find_outliers
+import modules
+
 import matplotlib.pyplot as plt
 import numpy as np
 import streamlit as st
@@ -10,13 +12,28 @@ delta = st.slider('Delta modifier', 1, 5, value=3)
 
 lower, upper, distribution, etc, ro_average, delta_sigma = find_outliers(data, delta)
 
+distribution_false = modules.get_distribution(data, modules.get_step_num(data), step_size=modules.get_step_size(data, modules.get_step_num(data)))
+print(distribution_false)
+colors = ['g' if i else 'r' for i in (data >= lower) & (data <= upper)]
+
+#colors_bar = ['g' if i else 'r' for i in (data >= lower) & (data <= upper)]
+x = [i for i in range(len(distribution_false))]
+plt.bar(x, distribution_false, label='Все измерения')#, color=colors)
+plt.xticks(x, [f'{round(np.min(data) + modules.get_step_size(data, modules.get_step_num(data)) * i, 1)} - {round(np.min(data) + modules.get_step_size(data, modules.get_step_num(data)) * (i + 1), 1)}' for i in x], rotation=16, size=7)
+plt.xlabel("Интенсивность гамма-измерения, Iγ")
+plt.ylabel("Количество измерений, N")
+plt.legend()
+st.pyplot()
+plt.cla()
+
 colors = ['g' if i else 'r' for i in (data >= lower) & (data <= upper)]
 
 x = [i for i in range(len(distribution))]
-plt.bar(x, distribution)
+plt.bar(x, distribution, label='Не аномальные измерения')
 plt.xticks(x, [f'{round(etc[3] + etc[2] * i, 1)} - {round(etc[3] + etc[2] * (i + 1), 1)}' for i in x], rotation=16, size=7)
 plt.xlabel("Интенсивность гамма-измерения, Iγ")
 plt.ylabel("Количество измерений, N")
+plt.legend()
 st.pyplot()
 plt.cla()
 
@@ -28,4 +45,4 @@ plt.ylabel("Интенсивность гамма-излучения, Iγ")
 plt.legend(fontsize='x-small')
 st.pyplot()
 
-st.info(f'Аномалии (Номера пикетов): {np.argwhere(np.array(data) > upper).T}')
+st.info(f'Аномалии (Номера пикетов): {np.argwhere(np.array(data) > upper).T.shape}')
