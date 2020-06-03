@@ -46,13 +46,19 @@ plt.legend(fontsize='x-small')
 plt.savefig('./images/full.png')
 st.pyplot()
 
-with open('info.md', 'a') as f:
+with open('info.md', 'a', encoding='utf-8') as f:
 	f.write('--- \n\n')
 	f.write('## Статистика \n\n')
 	f.write(f'Минимальная аномальная Интенсивность: `{upper}` \n\n')
 
 	f.write(f'![Illustration](https://github.com/Datasciensyash/geophys18/raw/master/rockphys/labworks/07/images/full.png) \n\n')
 
-	f.write(f'Аномалии (Номера пикетов): {[i for i in np.argwhere(np.array(data) > upper).T[0].tolist()]} \n\n' )
+	pickets = [i for i in np.argwhere(np.array(data) > upper).T[0].tolist()]
+	strp = ''
+	for i in pickets:
+		strp += f'`{i}`, '
+
+
+	f.write(f'Аномалии (Номера пикетов): {strp} \n\n' )
 
 st.info(f'Аномалии (Номера пикетов): {np.argwhere(np.array(data) > upper).T}')
