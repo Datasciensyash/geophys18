@@ -6,7 +6,7 @@
 
 Размер шага: `83.71428571428571` 
 
-![Illustration](https://github.com/Datasciensyash/ReviewClassifier/raw/master/rockphys/labworks/07/images/dist-159118705313.png) 
+![Illustration](https://github.com/Datasciensyash/geophys18/raw/master/rockphys/labworks/07/images/dist-159118714668.png) 
 
 Среднее значение: `55.857142857142854` 
 
@@ -26,7 +26,7 @@
 
 Размер шага: `33.714285714285715` 
 
-![Illustration](https://github.com/Datasciensyash/ReviewClassifier/raw/master/rockphys/labworks/07/images/dist-159118705322.png) 
+![Illustration](https://github.com/Datasciensyash/geophys18/raw/master/rockphys/labworks/07/images/dist-159118714678.png) 
 
 Среднее значение: `30.857142857142858` 
 
@@ -46,7 +46,7 @@
 
 Размер шага: `18.0` 
 
-![Illustration](https://github.com/Datasciensyash/ReviewClassifier/raw/master/rockphys/labworks/07/images/dist-159118705331.png) 
+![Illustration](https://github.com/Datasciensyash/geophys18/raw/master/rockphys/labworks/07/images/dist-159118714686.png) 
 
 Среднее значение: `23.0` 
 
@@ -66,7 +66,7 @@
 
 Размер шага: `12.285714285714286` 
 
-![Illustration](https://github.com/Datasciensyash/ReviewClassifier/raw/master/rockphys/labworks/07/images/dist-159118705339.png) 
+![Illustration](https://github.com/Datasciensyash/geophys18/raw/master/rockphys/labworks/07/images/dist-159118714694.png) 
 
 Среднее значение: `20.142857142857142` 
 
@@ -86,7 +86,7 @@
 
 Размер шага: `8.714285714285714` 
 
-![Illustration](https://github.com/Datasciensyash/ReviewClassifier/raw/master/rockphys/labworks/07/images/dist-159118705348.png) 
+![Illustration](https://github.com/Datasciensyash/geophys18/raw/master/rockphys/labworks/07/images/dist-159118714704.png) 
 
 Среднее значение: `18.357142857142858` 
 
@@ -106,7 +106,7 @@
 
 Размер шага: `5.857142857142857` 
 
-![Illustration](https://github.com/Datasciensyash/ReviewClassifier/raw/master/rockphys/labworks/07/images/dist-159118705357.png) 
+![Illustration](https://github.com/Datasciensyash/geophys18/raw/master/rockphys/labworks/07/images/dist-159118714712.png) 
 
 Среднее значение: `16.928571428571427` 
 
@@ -126,7 +126,7 @@
 
 Размер шага: `4.0` 
 
-![Illustration](https://github.com/Datasciensyash/ReviewClassifier/raw/master/rockphys/labworks/07/images/dist-159118705365.png) 
+![Illustration](https://github.com/Datasciensyash/geophys18/raw/master/rockphys/labworks/07/images/dist-159118714721.png) 
 
 Среднее значение: `16.0` 
 
@@ -146,7 +146,7 @@
 
 Размер шага: `3.4285714285714284` 
 
-![Illustration](https://github.com/Datasciensyash/ReviewClassifier/raw/master/rockphys/labworks/07/images/dist-159118705374.png) 
+![Illustration](https://github.com/Datasciensyash/geophys18/raw/master/rockphys/labworks/07/images/dist-159118714729.png) 
 
 Среднее значение: `15.714285714285714` 
 
@@ -166,7 +166,7 @@
 
 Размер шага: `2.2857142857142856` 
 
-![Illustration](https://github.com/Datasciensyash/ReviewClassifier/raw/master/rockphys/labworks/07/images/dist-159118705383.png) 
+![Illustration](https://github.com/Datasciensyash/geophys18/raw/master/rockphys/labworks/07/images/dist-159118714737.png) 
 
 Среднее значение: `15.142857142857142` 
 
